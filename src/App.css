@@ -1,0 +1,15 @@
+body{
+  background-color: #040221;
+}
+@media (max-width: 431px) {
+  
+  .smi{
+    display: none;
+  }
+  .chat{
+    width: 80vw;
+  }
+  .bi{
+    width: 80vw;
+  }
+}

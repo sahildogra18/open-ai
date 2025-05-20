@@ -32,96 +32,101 @@ function App() {
 
   return (
     <>
-      <div className="maincontainer flex text-white h-[100vh] bg-[#313045]">
-        <div className=" smi border-r border-[#313045]  bg-[#040221] text-white flex flex-col  w-[20vw] h-auto   pl-2">
-          <div className="firstHalf  flex-col   gap-[20px] flex pl-2 pt-4 border-b border-[#313045]  pb-56 ">
-            <div className="flex items-center gap-[5px]">
+      <div className="maincontainer flex text-white h-[100vh] bg-gradient-to-br from-[#2A2F4F] to-[#1A1B26]">
+        <div className="smi border-r border-[#3B3F5C] bg-[#1A1B26]/80 backdrop-blur-md text-white flex flex-col w-[20vw] h-auto pl-2">
+          <div className="firstHalf flex-col gap-[20px] flex pl-2 pt-4 border-b border-[#3B3F5C] pb-56">
+            <div className="flex items-center gap-[5px] hover:bg-[#3B3F5C] p-2 rounded-lg transition-colors">
               <div>
                 <img className="w-[30px]" src={logo} alt="" />
               </div>
-              <div>ChatGPT</div>
+              <div className="font-semibold text-[#7AA2F7]">ChatGPT</div>
             </div>
 
             <div>
-              <button className="bg-blue-600 w-[80%] p-[10px]">
-                + New Chat
+              <button className="bg-gradient-to-r from-[#7AA2F7] to-[#BB9AF7] hover:from-[#89B4FA] hover:to-[#C0A8F9] w-[80%] p-[10px] rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-[#7AA2F7]/20">
+                <span className="text-xl">+</span> New Chat
               </button>
             </div>
 
-            <div className="flex items-center gap-[8px] ">
-              <div className="">
-                <img className="w-[15px] " src={msg} alt="" />
-              </div>
-              <div>What is programming</div>
-            </div>
-            <div className="flex items-center gap-[8px]">
+            <div className="flex items-center gap-[8px] hover:bg-[#3B3F5C] p-2 rounded-lg cursor-pointer transition-colors">
               <div>
-                <img className="w-[15px] " src={msg} alt="" />
+                <img className="w-[15px]" src={msg} alt="" />
               </div>
-              <div>How to use API</div>
+              <div className="truncate text-[#A9B1D6]">What is programming</div>
+            </div>
+            <div className="flex items-center gap-[8px] hover:bg-[#3B3F5C] p-2 rounded-lg cursor-pointer transition-colors">
+              <div>
+                <img className="w-[15px]" src={msg} alt="" />
+              </div>
+              <div className="truncate text-[#A9B1D6]">How to use API</div>
             </div>
           </div>
-          <div className="secondHalf  flex-col mt-16  gap-[20px] flex pl-2 pt-4 ">
-            <div className="flex items-center gap-[8px]">
+          <div className="secondHalf flex-col mt-16 gap-[20px] flex pl-2 pt-4">
+            <div className="flex items-center gap-[8px] hover:bg-[#3B3F5C] p-2 rounded-lg cursor-pointer transition-colors">
               <div>
-                <img className="w-[15px] " src={home} alt="" />
+                <img className="w-[15px]" src={home} alt="" />
               </div>
-              <div>Home</div>
+              <div className="text-[#A9B1D6]">Home</div>
             </div>
 
-            <div className="flex items-center gap-[8px]">
+            <div className="flex items-center gap-[8px] hover:bg-[#3B3F5C] p-2 rounded-lg cursor-pointer transition-colors">
               <div>
-                <img className="w-[15px] " src={bk} alt="" />
+                <img className="w-[15px]" src={bk} alt="" />
               </div>
-              <div>Saved</div>
+              <div className="text-[#A9B1D6]">Saved</div>
             </div>
 
-            <div className="flex items-center gap-[8px]">
+            <div className="flex items-center gap-[8px] hover:bg-[#3B3F5C] p-2 rounded-lg cursor-pointer transition-colors">
               <div>
-                <img className="w-[15px] " src={rocket} alt="" />
+                <img className="w-[15px]" src={rocket} alt="" />
               </div>
-              <div>Upgrade Pro</div>
+              <div className="text-[#F7768E]">Upgrade Pro</div>
             </div>
           </div>
         </div>
 
-        <div className="secondphase w-[100vw] h-auto bg-[#040221] flex flex-col justify-around items-center">
-          <div className="flex flex-col h-auto   gap-2">
+        <div className="secondphase w-[100vw] h-auto bg-[#1A1B26]/80 backdrop-blur-md flex flex-col justify-between items-center p-4">
+          <div className="flex flex-col h-auto gap-4 w-full max-w-4xl overflow-y-auto">
             {messages.map((msg, i) => (
               <div
                 key={i}
                 className={`chat ${
                   msg.isBot ? "bot" : "user"
-                } resonse w-[50vw] bg-[#1c1f3d] flex items-center gap-2 pl-2 p-[30px] rounded-lg mb-4`}
+                } response w-full ${
+                  msg.isBot 
+                    ? "bg-[#24283B] border-l-4 border-[#7AA2F7]" 
+                    : "bg-[#1F2335] border-l-4 border-[#F7768E]"
+                } flex items-start gap-4 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300`}
               >
                 <img
-                  className="w-[50px]"
+                  className="w-[40px] h-[40px] rounded-full ring-2 ring-offset-2 ring-offset-[#1A1B26]"
                   src={msg.isBot ? greenl : user}
                   alt="avatar"
                 />
-                <div>{msg.text}</div>
+                <div className="flex-1 whitespace-pre-wrap text-[#A9B1D6]">{msg.text}</div>
               </div>
             ))}
           </div>
 
-          <div className="bg-[#1c1f1d]  bi w-[50vw]  flex items-center justify-around p-[10px] rounded-lg">
+          <div className="bg-[#24283B] w-full max-w-4xl flex items-center justify-between p-4 rounded-lg shadow-lg mt-4 border border-[#3B3F5C] hover:border-[#7AA2F7] transition-colors duration-300">
             <input
-              className="bg-[#1c1f1d] sticky bottom-0  w-[40vw] appearance-none bg-transparent border-none outline-none "
+              className="bg-transparent w-full appearance-none border-none outline-none text-[#A9B1D6] placeholder-[#565F89]"
               type="text"
               placeholder="Send a message"
               value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-              }}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
             />
-            <div>
+            <button 
+              onClick={handleSend}
+              className="p-2 hover:bg-[#3B3F5C] rounded-lg transition-colors duration-300"
+            >
               <img
-                className="w-[15px] mr-8  cursor-pointer"
+                className="w-[20px]"
                 src={send}
-                alt=""
-                onClick={handleSend}
+                alt="Send"
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>

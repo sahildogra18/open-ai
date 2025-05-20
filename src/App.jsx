@@ -9,23 +9,27 @@ import user from "./ChatGPT_Clone_assets/user-icon.png";
 import send from "./ChatGPT_Clone_assets/send.svg";
 import run from "./Openai";
 import { useState } from "react";
+import Loader from "./Loader";
 
 function App() {
   let [input, setInput] = useState("");
   let [messages, setMessages] = useState([
     { text: "Hola, como estas? Mi nombre es Sahil", isBot: true },
   ]);
+  let [ loading , setLoading] = useState(false)
 
   let handleSend = async () => {
     if (!input.trim()) return; // ✅ Empty input prevent karna
-
+setLoading(true)
     let res = await run(input);
 
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: input, isBot: false },
       { text: res, isBot: true },
+    
     ]);
+    setLoading(false)
 
     setInput("");
   };
@@ -86,27 +90,31 @@ function App() {
         </div>
 
         <div className="secondphase w-[100vw] h-auto bg-[#1A1B26]/80 backdrop-blur-md flex flex-col justify-between items-center p-4">
-          <div className="flex flex-col h-auto gap-4 w-full max-w-4xl overflow-y-auto">
-            {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`chat ${
-                  msg.isBot ? "bot" : "user"
-                } response w-full ${
-                  msg.isBot 
-                    ? "bg-[#24283B] border-l-4 border-[#7AA2F7]" 
-                    : "bg-[#1F2335] border-l-4 border-[#F7768E]"
-                } flex items-start gap-4 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300`}
-              >
-                <img
-                  className="w-[40px] h-[40px] rounded-full ring-2 ring-offset-2 ring-offset-[#1A1B26]"
-                  src={msg.isBot ? greenl : user}
-                  alt="avatar"
-                />
-                <div className="flex-1 whitespace-pre-wrap text-[#A9B1D6]">{msg.text}</div>
-              </div>
-            ))}
-          </div>
+         
+         {
+          loading ? <Loader /> :<div className="flex flex-col h-auto gap-4 w-full max-w-4xl overflow-y-auto">
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`chat ${
+                msg.isBot ? "bot" : "user"
+              } response w-full ${
+                msg.isBot 
+                  ? "bg-[#24283B] border-l-4 border-[#7AA2F7]" 
+                  : "bg-[#1F2335] border-l-4 border-[#F7768E]"
+              } flex items-start gap-4 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300`}
+            >
+              <img
+                className="w-[40px] h-[40px] rounded-full ring-2 ring-offset-2 ring-offset-[#1A1B26]"
+                src={msg.isBot ? greenl : user}
+                alt="avatar"
+              />
+              <div className="flex-1 whitespace-pre-wrap text-[#A9B1D6]">{msg.text}</div>
+            </div>
+          ))}
+        </div>
+         } 
+         
 
           <div className="bg-[#24283B] w-full max-w-4xl flex items-center justify-between p-4 rounded-lg shadow-lg mt-4 border border-[#3B3F5C] hover:border-[#7AA2F7] transition-colors duration-300">
             <input
